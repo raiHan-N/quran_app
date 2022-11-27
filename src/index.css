@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-light;
+  }
+
+  nav {
+    @apply bg-primary py-3 px-16 flex justify-between items-center shadow-[0_9px_9px_-7px_rgba(92,184,228,0.3)];
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-[35rem] h-[25rem] bg-light shadow-md rounded-[20px] mt-4;
+  }
+
+  .card_wrapper {
+    @apply flex flex-wrap gap-3;
+  }
+}
