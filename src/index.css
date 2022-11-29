@@ -12,6 +12,14 @@
   nav {
     @apply bg-primary py-3 px-16 flex justify-between items-center shadow-[0_9px_9px_-7px_rgba(92,184,228,0.3)];
   }
+
+  .light {
+    @apply bg-light;
+  }
+
+  .dark {
+    @apply bg-gray-800 text-zinc-50;
+  }
 }
 
 @layer components {

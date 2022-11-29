@@ -25,6 +25,8 @@ const Surah = () => {
   //   setPlayAud(!playAud);
   // };
 
+  const audioRef = useRef();
+
   useEffect(() => {
     axios
       .get(`https://quran-api-id.vercel.app/surahs/${nomor}`)
