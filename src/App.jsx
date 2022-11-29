@@ -3,8 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Surah from "./pages/Surah";
+import checkMode from "./utils/checkDarkMode";
 
 function App() {
+  checkMode();
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

@@ -9,6 +9,7 @@ const Surah = () => {
   // const player = useRef(new Audio());
 
   const [surah, setSurah] = useState();
+  const [ayah, setAyah] = useState();
 
   // const [playAud, setPlayAud] = useState(false);
 
@@ -22,6 +23,8 @@ const Surah = () => {
   //   player.current.currentTime = 0;
   //   setPlayAud(!playAud);
   // };
+
+  const audioRef = useRef();
 
   useEffect(() => {
     axios
@@ -47,6 +50,9 @@ const Surah = () => {
       <h1 className="text-4xl font-semibold text-light">{surah.name}</h1>
       <div className="flex justify-between w-full px-4 my-3">
         <Link
+          onClick={() => {
+            audioRef.current.stop();
+          }}
           to={`/surah/${
             surah.number > 1 ? surah.number - 1 : (surah.number = 1)
           }`}
@@ -55,6 +61,9 @@ const Surah = () => {
           Sebelumnya
         </Link>
         <Link
+          onClick={() => {
+            audioRef.current.stop();
+          }}
           to={`/surah/${
             surah.number < 114 ? surah.number + 1 : (surah.number = 114)
           }`}
@@ -81,7 +90,7 @@ const Surah = () => {
               </div>
             )} */}
 
-            <audio controls>
+            <audio controls ref={audioRef}>
               <source src={item.audio.alafasy} />
             </audio>
 
