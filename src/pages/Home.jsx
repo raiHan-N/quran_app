@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <main className="App font-serif px-3 py-16">
+      <main className="App px-3 py-16">
         <InfoCard />
 
         <div className="px-3 flex flex-wrap justify-center gap-[30px]">
