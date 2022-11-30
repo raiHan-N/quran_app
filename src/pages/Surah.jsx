@@ -10,6 +10,8 @@ const Surah = () => {
 
   const [surah, setSurah] = useState();
 
+  const [currentPlay, setCurrentPlay] = useState(null);
+
   const player = useRef(new Array());
 
   useEffect(() => {
@@ -32,6 +34,27 @@ const Surah = () => {
       </div>
     );
   }
+
+  const handlePlay = (e, index) => {
+    setCurrentPlay(e.target.src.toString());
+
+    if (currentPlay !== null && currentPlay !== undefined) {
+      if (currentPlay !== e.target.src.toString()) {
+        player.current.forEach((aud) => {
+          aud.pause();
+          aud.currentTime = 0;
+        });
+
+        player.current[index].play();
+      }
+    }
+  };
+
+  const autoPlayNext = (e, index) => {
+    if (index < surah.ayahs.length - 1) {
+      player.current[index + 1].play();
+    }
+  };
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center bg-primary md:p-4">
@@ -67,6 +90,9 @@ const Surah = () => {
                   element !== null && player.current.push(element)
                 }
                 playerI={player.current[i]}
+                handlePlay={handlePlay}
+                autoPlayNext={autoPlayNext}
+                index={i}
               />
               <Archive />
             </div>
