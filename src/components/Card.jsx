@@ -17,13 +17,13 @@ const Card = ({ title, nomor, arti, handleCard }) => {
   return (
     <div
       className={`w-[400px] h-[250px] rounded-[20px] ${
-        mode === "dark" ? "bg-[#172343]" : "bg-light"
+        mode === "dark" ? "bg-card_dark" : "bg-light"
       } shadow-[0_9px_25px_0_rgba(59,55,55,0.13)] px-[40px] py-[36px] flex flex-col justify-between`}
     >
       <div className="w-full flex justify-between items-center">
         <p
           className={`w-[40px] h-[40px] ${
-            mode === "light" ? "bg-primary" : "bg-[#356379]"
+            mode === "light" ? "bg-primary" : "bg-primary_dark"
           } text-light flex justify-center items-center rounded-full text-[22px] font-[400]`}
           ref={nomorRef}
         >
@@ -32,14 +32,14 @@ const Card = ({ title, nomor, arti, handleCard }) => {
         {like ? (
           <AiOutlineHeart
             className={`w-[35px] h-[35px] ${
-              mode === "dark" ? "text-[#356379]" : "text-primary"
+              mode === "dark" ? "text-primary_dark" : "text-primary"
             } cursor-pointer`}
             onClick={handleLike}
           />
         ) : (
           <AiFillHeart
             className={`w-[35px] h-[35px] ${
-              mode === "dark" ? "text-[#356379]" : "text-primary"
+              mode === "dark" ? "text-primary_dark" : "text-primary"
             } cursor-pointer`}
             onClick={handleLike}
           />

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AiFillPlayCircle, AiFillStop } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import checkMode from "../utils/checkDarkMode";
 
 export default function CustomAudio({
   source,
@@ -10,6 +12,9 @@ export default function CustomAudio({
   index,
 }) {
   const [playAud, setPlayAud] = useState(false);
+  const { nomor } = useParams();
+
+  const mode = checkMode();
 
   const stopAudFunc = () => {
     playerI.pause();
@@ -18,7 +23,6 @@ export default function CustomAudio({
   };
 
   const playAudFunc = (e) => {
-    console.log(e.target.id);
     playerI.play();
     return setPlayAud(true);
   };
@@ -41,10 +45,17 @@ export default function CustomAudio({
         onPause={() => setPlayAud(false)}
       ></audio>
       {playAud ? (
-        <AiFillStop className="text-primary text-3xl" onClick={stopAudFunc} />
+        <AiFillStop
+          className={`${
+            mode === "dark" ? "text-primary_dark" : "text-primary"
+          } text-3xl`}
+          onClick={stopAudFunc}
+        />
       ) : (
         <AiFillPlayCircle
-          className="text-primary text-3xl"
+          className={`${
+            mode === "dark" ? "text-primary_dark" : "text-primary"
+          } text-3xl`}
           onClick={playAudFunc}
         />
       )}
