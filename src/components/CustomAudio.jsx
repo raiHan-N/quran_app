@@ -48,14 +48,14 @@ export default function CustomAudio({
         <AiFillStop
           className={`${
             mode === "dark" ? "text-primary_dark" : "text-primary"
-          } text-3xl`}
+          } text-3xl cursor-pointer`}
           onClick={stopAudFunc}
         />
       ) : (
         <AiFillPlayCircle
           className={`${
             mode === "dark" ? "text-primary_dark" : "text-primary"
-          } text-3xl`}
+          } text-3xl cursor-pointer`}
           onClick={playAudFunc}
         />
       )}

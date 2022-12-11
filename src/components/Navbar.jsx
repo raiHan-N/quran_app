@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import checkMode from "../utils/checkDarkMode";
+import { MdDarkMode } from "react-icons/md";
 
 const Navbar = () => {
   const [darkmode, setDarkmode] = useState(false);
@@ -32,7 +32,7 @@ const Navbar = () => {
       >
         {darkmode ? (
           <div className="w-[18px] h-[18px] md:w-[32px] md:h-[32px] bg-light rounded-full absolute right-[3px] flex items-center justify-center ">
-            <img src="/assets/light_mode.svg" alt="light mode icons" />
+            <MdDarkMode className="w-full text-card_dark" />
           </div>
         ) : (
           <div className="w-[18px] h-[18px] md:w-[32px] md:h-[32px] bg-light rounded-full absolute left-[3px] flex items-center justify-center">
