@@ -13,6 +13,7 @@ specifiers:
   react-dom: ^18.2.0
   react-icons: ^4.4.0
   react-router-dom: ^6.4.2
+  react-web-track-player: ^1.4.3
   tailwindcss: ^3.1.8
   vite: ^3.1.0
 
@@ -24,6 +25,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.4.0_react@18.2.0
   react-router-dom: 6.4.2_biqbaboplfbrettd7655fr4n2y
+  react-web-track-player: 1.4.3_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/react': 18.0.20
@@ -31,7 +33,7 @@ devDependencies:
   '@vitejs/plugin-react': 2.1.0_vite@3.1.2
   autoprefixer: 10.4.11_postcss@8.4.16
   postcss: 8.4.16
-  tailwindcss: 3.1.8_postcss@8.4.16
+  tailwindcss: 3.1.8
   vite: 3.1.2
 
 packages:
@@ -1249,6 +1251,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-web-track-player/1.4.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-iR7mpXsvMKafXTBiS9FhzV8XDPK/DeofT630i96IkqsxNwfIc7oUXnlRLedNX9pUJalsvdvAx3fifDjNTnnJkQ==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -1337,12 +1349,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.16:
+  /tailwindcss/3.1.8:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
-    peerDependencies:
-      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
