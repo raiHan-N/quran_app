@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AiFillHome } from "react-icons/ai";
+import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 import CustomAudio from "../components/CustomAudio";
 import Archive from "../components/Archive";
 import checkMode from "../utils/checkDarkMode";
-import { AiFillPlayCircle, AiFillStop } from "react-icons/ai";
+import { AiFillPlayCircle, AiFillStop, AiFillHome } from "react-icons/ai";
 import player, {
   useTrackPlayerProgress,
   usePlaybackTrackChanged,
@@ -24,6 +24,8 @@ const Surah = () => {
   const [lastIndex, setLastIndex] = useState(null);
 
   const [statusPlay, setStatusPlay] = useState(false);
+
+  const [volumeCust, setVolumeCust] = useState(0.7);
 
   const [currentPlay, setCurrentPlay] = useState(null);
 
@@ -104,6 +106,12 @@ const Surah = () => {
     await player.skipToPrevious();
   }
 
+  const handleVolume = (e) => {
+    setVolumeCust(e.target.value / 100);
+    player.setVolume(volumeCust);
+    return;
+  };
+
   function handleSeek() {
     // <!-- Seek to 10 seconds -->
     player.seekTo(10);
@@ -160,8 +168,7 @@ const Surah = () => {
       ],
     });
 
-    player.setVolume(1);
-
+    player.setVolume(volumeCust);
     axios
       .get(`https://quran-api-id.vercel.app/surahs/${nomor}`)
       .then((res) => {
@@ -248,6 +255,37 @@ const Surah = () => {
         </a>
       </div>
       <div className="w-full flex flex-col gap-3 p-6">
+        <div className="w-50% flex gap-2 items-center ">
+          <input
+            type="range"
+            defaultValue={70}
+            min={0}
+            max={100}
+            onChange={handleVolume}
+            className="bg-light rounded-full h-2 appearance-none cursor-pointer "
+          />
+          {volumeCust == 0 ? (
+            <HiVolumeOff
+              className={`${
+                mode === "dark" ? "text-lightdark" : "text-light"
+              } text-3xl cursor-pointer`}
+              onClick={() => {
+                player.setVolume(0.7);
+                return setVolumeCust(0.7);
+              }}
+            />
+          ) : (
+            <HiVolumeUp
+              className={`${
+                mode === "dark" ? "text-lightdark" : "text-light"
+              } text-3xl cursor-pointer`}
+              onClick={() => {
+                player.setVolume(0);
+                return setVolumeCust(0);
+              }}
+            />
+          )}
+        </div>
         {parseInt(nomor) !== 1 ? (
           <div className="w-full flex justify-center items-center gap-5 p-9 text-light">
             {surah.bismillah ? (
@@ -267,7 +305,7 @@ const Surah = () => {
             }  shadow-[0_9px_25px_0_rgba(59,55,55,0.1)] flex flex-col gap-8 rounded-md`}
             key={item.number.inSurah}
           >
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between text-primary text-lg font-medium">
               {statusPlay && i + 1 == lastIndex ? (
                 <>
                   <AiFillStop
@@ -276,7 +314,10 @@ const Surah = () => {
                     } text-3xl cursor-pointer`}
                     onClick={() => handleReset()}
                   />
-                  {position}|{duration}
+                  {position == 0 || position === duration
+                    ? "0% "
+                    : " " + Math.round((position / duration) * 100) + "% "}
+                  |{" 100%"}
                 </>
               ) : (
                 <AiFillPlayCircle
