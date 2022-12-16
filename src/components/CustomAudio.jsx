@@ -12,7 +12,6 @@ export default function CustomAudio({
   index,
 }) {
   const [playAud, setPlayAud] = useState(false);
-  const { nomor } = useParams();
 
   const mode = checkMode();
 

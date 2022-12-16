@@ -27,7 +27,10 @@ const Home = () => {
   };
 
   const handleSearch = (e) => {
-    let lowerCase = e.target.value.toLowerCase();
+    let lowerCase = e.target.value
+      .replace(" ", "")
+      .replace(/[^a-zA-Z0-9 ]/g, "")
+      .toLowerCase();
     setInputText(lowerCase);
   };
 
@@ -36,10 +39,10 @@ const Home = () => {
       return e;
     } else {
       return e.name
-        .replace("-", "")
-        .replace("'", "")
+        .replace(" ", "")
+        .replace(/[^a-zA-Z0-9 ]/g, "")
         .toLowerCase()
-        .includes(inputText);
+        .match(inputText);
     }
   });
 
