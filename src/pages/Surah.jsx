@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
-import CustomAudio from "../components/CustomAudio";
 import Archive from "../components/Archive";
 import checkMode from "../utils/checkDarkMode";
 import { AiFillPlayCircle, AiFillStop, AiFillHome } from "react-icons/ai";
@@ -123,10 +122,6 @@ const Surah = () => {
 
   const [surah, setSurah] = useState();
 
-  // const player = useRef([]);
-
-  // console.log(tracks);
-
   useEffect(() => {
     setLastIndex(null);
 
@@ -201,23 +196,6 @@ const Surah = () => {
       </div>
     );
   }
-
-  // const handlePlay = (e, index) => {
-  //   setCurrentPlay(e.target.src.toString());
-
-  //   if (currentPlay !== null && currentPlay !== undefined) {
-  //     if (currentPlay !== e.target.src.toString()) {
-  //       player.current.forEach((aud) => {
-  //         aud.pause();
-  //         aud.currentTime = 0;
-  //       });
-
-  //       player.current[index].play();
-  //     }
-  //   }
-  // };
-
-  // console.log(cardRef);
 
   const autoPlayNext = (e, index) => {
     if (index < surah.ayahs.length - 1) {
@@ -329,30 +307,6 @@ const Surah = () => {
               )}
               <Archive />
             </div>
-
-            {/* <div>
-              {position}|{duration}
-            </div>
-
-            <button type="button" onClick={() => handlePlay(i + 1)}>
-              Play
-            </button>
-
-            <button type="button" onClick={handlePause}>
-              Pause
-            </button>
-
-            <button type="button" onClick={handleSkip}>
-              Skip to Next
-            </button>
-
-            <button type="button" onClick={handlePrev}>
-              Skip to Prev
-            </button>
-
-            <button type="button" onClick={handleSeek}>
-              Seek To
-            </button> */}
 
             <div className="w-full flex justify-end items-center gap-5">
               <p className="text-3xl font-arabic">{item.arab}</p>
