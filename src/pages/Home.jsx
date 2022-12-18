@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
+import Footer from "../components/Footer";
 import InfoCard from "../components/InfoCard";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
@@ -117,6 +118,7 @@ const Home = () => {
               })}
         </div>
       </main>
+      <Footer />
     </>
   );
 };

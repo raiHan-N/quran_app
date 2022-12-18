@@ -210,48 +210,83 @@ const Surah = () => {
         </a>
       </div>
       <div className="w-full flex flex-col gap-3 p-6">
-        <div className="w-50% flex gap-2 items-center ">
-          <input
-            type="range"
-            defaultValue={70}
-            min={0}
-            max={100}
-            onChange={handleVolume}
-            className="bg-light rounded-full h-2 appearance-none cursor-pointer "
-          />
-          {volumeCust == 0 ? (
-            <HiVolumeOff
-              className={`${
-                mode === "dark" ? "text-lightdark" : "text-light"
-              } text-3xl cursor-pointer`}
-              onClick={() => {
-                player.setVolume(0.7);
-                return setVolumeCust(0.7);
-              }}
-            />
-          ) : (
-            <HiVolumeUp
-              className={`${
-                mode === "dark" ? "text-lightdark" : "text-light"
-              } text-3xl cursor-pointer`}
-              onClick={() => {
-                player.setVolume(0);
-                return setVolumeCust(0);
-              }}
-            />
-          )}
-        </div>
         {parseInt(nomor) !== 1 ? (
           <div className="w-full flex justify-center items-center gap-5 p-9 text-light">
             {surah.bismillah ? (
-              <p className="text-4xl font-arabic">{surah.bismillah.arab} </p>
+              <div className="w-full flex flex-col items-center gap-3">
+                <p className="text-4xl font-arabic">{surah.bismillah.arab} </p>
+                <div className="w-50% flex gap-2 items-center self-start">
+                  <input
+                    type="range"
+                    defaultValue={70}
+                    min={0}
+                    max={100}
+                    onChange={handleVolume}
+                    className="bg-light rounded-full h-2 appearance-none cursor-pointer "
+                  />
+                  {volumeCust == 0 ? (
+                    <HiVolumeOff
+                      className={`${
+                        mode === "dark" ? "text-lightdark" : "text-light"
+                      } text-3xl cursor-pointer`}
+                      onClick={() => {
+                        player.setVolume(0.7);
+                        return setVolumeCust(0.7);
+                      }}
+                    />
+                  ) : (
+                    <HiVolumeUp
+                      className={`${
+                        mode === "dark" ? "text-lightdark" : "text-light"
+                      } text-3xl cursor-pointer`}
+                      onClick={() => {
+                        player.setVolume(0);
+                        return setVolumeCust(0);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
             ) : (
               <></>
             )}
           </div>
         ) : (
-          <></>
+          <>
+            <div className="w-50% flex gap-2 items-center ">
+              <input
+                type="range"
+                defaultValue={70}
+                min={0}
+                max={100}
+                onChange={handleVolume}
+                className="bg-light rounded-full h-2 appearance-none cursor-pointer "
+              />
+              {volumeCust == 0 ? (
+                <HiVolumeOff
+                  className={`${
+                    mode === "dark" ? "text-lightdark" : "text-light"
+                  } text-3xl cursor-pointer`}
+                  onClick={() => {
+                    player.setVolume(0.7);
+                    return setVolumeCust(0.7);
+                  }}
+                />
+              ) : (
+                <HiVolumeUp
+                  className={`${
+                    mode === "dark" ? "text-lightdark" : "text-light"
+                  } text-3xl cursor-pointer`}
+                  onClick={() => {
+                    player.setVolume(0);
+                    return setVolumeCust(0);
+                  }}
+                />
+              )}
+            </div>
+          </>
         )}
+
         {surah.ayahs.map((item, i) => (
           <div
             ref={(el) => (cardRef.current[i] = el)}
