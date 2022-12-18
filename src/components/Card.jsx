@@ -1,16 +1,25 @@
 import React, { useRef } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import checkMode from "../utils/checkDarkMode";
+import { DataConsumer } from "../utils/DataProvider";
 
 const Card = ({ title, nomor, arti, handleCard }) => {
-  const [like, setLike] = useState(true);
+  const [like, setLike] = useState(false);
+  const [data, setData] = useContext(DataConsumer);
 
   const mode = checkMode();
 
   const nomorRef = useRef(null);
+  const likeRef = useRef(null);
 
   const handleLike = (e) => {
+    console.log(likeRef.current.children[0].textContent);
+    const liked = localStorage.getItem("liked");
+    if (!liked) {
+      localStorage.setItem("liked", []);
+    }
     setLike(!like);
   };
 
@@ -20,7 +29,7 @@ const Card = ({ title, nomor, arti, handleCard }) => {
         mode === "dark" ? "bg-card_dark" : "bg-light"
       } shadow-[0_9px_25px_0_rgba(59,55,55,0.13)] px-[40px] py-[36px] flex flex-col justify-between`}
     >
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center" ref={likeRef}>
         <p
           className={`w-[40px] h-[40px] ${
             mode === "light" ? "bg-primary" : "bg-primary_dark"
@@ -30,14 +39,14 @@ const Card = ({ title, nomor, arti, handleCard }) => {
           {nomor}
         </p>
         {like ? (
-          <AiOutlineHeart
+          <AiFillHeart
             className={`w-[35px] h-[35px] ${
               mode === "dark" ? "text-primary_dark" : "text-primary"
             } cursor-pointer`}
             onClick={handleLike}
           />
         ) : (
-          <AiFillHeart
+          <AiOutlineHeart
             className={`w-[35px] h-[35px] ${
               mode === "dark" ? "text-primary_dark" : "text-primary"
             } cursor-pointer`}

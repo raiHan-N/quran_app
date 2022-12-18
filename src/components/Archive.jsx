@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiFillBook, AiOutlineBook } from "react-icons/ai";
 import checkMode from "../utils/checkDarkMode";
 
-export default function Archive() {
+export default function Archive({}) {
   const [archive, setArchive] = useState(false);
   const mode = checkMode();
 

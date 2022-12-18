@@ -1,8 +1,12 @@
 import React from "react";
+import { useContext } from "react";
 import checkMode from "../utils/checkDarkMode";
+import { DataConsumer } from "../utils/DataProvider";
 
 const InfoCard = () => {
   const mode = checkMode();
+
+  const [data, setData] = useContext(DataConsumer);
 
   return (
     <div

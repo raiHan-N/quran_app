@@ -97,14 +97,6 @@ const Surah = () => {
     // player.reset();
   }
 
-  async function handleSkip() {
-    await player.skipToNext();
-  }
-
-  async function handlePrev() {
-    await player.skipToPrevious();
-  }
-
   const handleVolume = (e) => {
     setVolumeCust(e.target.value / 100);
     player.setVolume(volumeCust);
@@ -196,12 +188,6 @@ const Surah = () => {
       </div>
     );
   }
-
-  const autoPlayNext = (e, index) => {
-    if (index < surah.ayahs.length - 1) {
-      player.current[index + 1].play();
-    }
-  };
 
   return (
     <main
@@ -305,7 +291,7 @@ const Surah = () => {
                   onClick={() => handlePlay(i + 1)}
                 />
               )}
-              <Archive />
+              <Archive no={nomor} />
             </div>
 
             <div className="w-full flex justify-end items-center gap-5">
