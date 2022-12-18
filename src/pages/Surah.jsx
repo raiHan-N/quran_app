@@ -88,10 +88,6 @@ const Surah = () => {
     player.reset();
   }
 
-  function handlePause() {
-    player.pause();
-  }
-
   function handleReset() {
     setLastIndex(null);
     // player.reset();
@@ -102,11 +98,6 @@ const Surah = () => {
     player.setVolume(volumeCust);
     return;
   };
-
-  function handleSeek() {
-    // <!-- Seek to 10 seconds -->
-    player.seekTo(10);
-  }
 
   let { nomor } = useParams();
 
