@@ -1,12 +1,47 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import checkMode from "../utils/checkDarkMode";
-import { DataConsumer } from "../utils/DataProvider";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const InfoCard = () => {
   const mode = checkMode();
 
-  const [data, setData] = useContext(DataConsumer);
+  const [ayahs, setAyahs] = useState();
+  const [surah, setSurah] = useState([]);
+  const [ayat, setAyat] = useState();
+
+  const noSurah = JSON.parse(localStorage.getItem("param"));
+
+  useEffect(() => {
+    let ayah = JSON.parse(localStorage.getItem("surah"));
+    ayah = ayah?.inSurah;
+    setAyahs();
+    if (ayah) {
+      axios
+        .get(`https://quran-api-id.vercel.app/surahs/${noSurah}/ayahs/${ayah}`)
+        .then((res) => {
+          setAyat(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (noSurah) {
+      axios
+        .get(`https://quran-api-id.vercel.app/surahs/${noSurah}`)
+        .then((res) => {
+          setSurah(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      return;
+    }
+  }, []);
 
   return (
     <div
@@ -21,16 +56,20 @@ const InfoCard = () => {
           Terakhir Baca
         </h1>
         <p className="text-[16px] md:text-[22px] font-normal leading-7 text-light">
-          Surah : Al Fatihah &nbsp; Ayat : 10
+          Surah : {surah.length == 0 ? "Belum ada" : surah.name}
+        </p>
+        <p className="text-[16px] md:text-[22px] font-normal leading-7 text-light">
+          Ayat : {ayat ? ayat?.number?.inSurah : "Belum ada"}
         </p>
       </div>
-      <button
+      <Link
+        to={noSurah ? `/surah/${noSurah}` : ""}
         className={`${
           mode === "light" ? "bg-primary" : "bg-[#356379]"
         } text-light flex justify-center items-center font-normal text-[16px] md:text-[28px] leading-9 rounded-[20px] px-5 py-3`}
       >
         Lihat
-      </button>
+      </Link>
     </div>
   );
 };

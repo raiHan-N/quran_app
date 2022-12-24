@@ -24,9 +24,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(likedData);
     localStorage.setItem("liked", JSON.stringify(likedData));
-    console.log(localStorage.getItem("liked"));
   }, [likedData]);
 
   const handleLikeData = (likeIndex) => {
@@ -83,7 +81,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <main className="App px-3 py-16">
+      <main className="App px-3 py-16 min-h-screen">
         <InfoCard />
         <SearchBar handleSearch={handleSearch} />
         <div className="px-3 flex flex-wrap justify-center gap-[30px]">

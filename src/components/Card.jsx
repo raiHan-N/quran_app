@@ -1,19 +1,8 @@
 import React, { useRef } from "react";
-import { useContext } from "react";
-import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import checkMode from "../utils/checkDarkMode";
-import { DataConsumer } from "../utils/DataProvider";
 
-const Card = ({
-  title,
-  nomor,
-  arti,
-  handleCard,
-  likedData,
-  likeIndex,
-  like,
-}) => {
+const Card = ({ title, nomor, arti, handleCard, likedData, like }) => {
   const mode = checkMode();
 
   const nomorRef = useRef(null);

@@ -30,20 +30,21 @@ const Surah = () => {
 
   const cardRef = useRef([]);
 
+  const [archive, setArchive] = useState([]);
+
+  const [ayahs, setAyahs] = useState([]);
+
   useEffect(() => {
     // <!-- Will be updated every time a track change -->
-    console.log(currentTrack);
     setCurrentPlay(currentTrack);
   }, [currentTrack]);
 
   useEffect(() => {
     // <!-- Will be updated every time a playback state change -->
-    console.log(playbackState);
   }, [playbackState]);
 
   useEffect(() => {
     // <!-- Will be updated every time track position state change -->
-    console.log(position, bufferedPosition, duration);
     if (position === bufferedPosition && lastIndex !== null) {
       if (lastIndex < tracks.length) {
         handlePlay(lastIndex + 1);
@@ -59,7 +60,6 @@ const Surah = () => {
       if (lastIndex > tracks.length) {
         setLastIndex(null);
         setStatusPlay(false);
-        console.log("end");
         return;
       } else {
         const track = [];
@@ -170,7 +170,29 @@ const Surah = () => {
     return () => {};
   }, [nomor]);
 
-  // console.log(surah);
+  useEffect(() => {
+    axios
+      .get(`https://quran-api-id.vercel.app/surahs/${nomor}/ayahs`)
+      .then((res) => {
+        setAyahs(res.data.map((e) => e.number.inQuran));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [nomor]);
+
+  useEffect(() => {
+    const surahStorage = localStorage.getItem("surah");
+    if (!surahStorage && archive.length > -1) {
+      localStorage.setItem("surah", JSON.stringify(archive));
+    } else {
+      setArchive(JSON.parse(surahStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("surah", JSON.stringify(archive));
+  }, [archive]);
 
   if (!surah) {
     return (
@@ -180,6 +202,11 @@ const Surah = () => {
     );
   }
 
+  const handleArchive = (no) => {
+    localStorage.setItem("param", JSON.stringify(nomor));
+    return setArchive(no);
+  };
+
   return (
     <main
       className={`w-full min-h-screen flex flex-col items-center ${
@@ -187,27 +214,33 @@ const Surah = () => {
       }  md:p-4`}
     >
       <h1 className="text-4xl font-semibold text-light">{surah.name}</h1>
+
       <div className="flex justify-between w-full px-4 my-8">
-        <a
-          href={`/surah/${
-            surah.number > 1 ? surah.number - 1 : (surah.number = 1)
-          }`}
-          className={`px-4 py-2 ${
-            mode === "dark" ? "bg-primary" : "bg-primary_dark"
-          } flex justify-center items-center text-light rounded-lg`}
-        >
-          Sebelumnya
-        </a>
-        <a
-          href={`/surah/${
-            surah.number < 114 ? surah.number + 1 : (surah.number = 114)
-          }`}
-          className={`px-4 py-2 ${
-            mode === "dark" ? "bg-primary" : "bg-primary_dark"
-          } flex justify-center items-center text-light rounded-lg`}
-        >
-          Selanjutnya
-        </a>
+        {surah.number > 1 ? (
+          <a
+            href={`/surah/${surah.number - 1}`}
+            className={`px-4 py-2 ${
+              mode === "dark" ? "bg-primary" : "bg-primary_dark"
+            } flex justify-center mr-auto items-center text-light rounded-lg`}
+          >
+            Sebelumnya
+          </a>
+        ) : (
+          <></>
+        )}
+
+        {surah.number < 114 ? (
+          <a
+            href={`/surah/${surah.number + 1}`}
+            className={`px-4 py-2 ml-auto ${
+              mode === "dark" ? "bg-primary" : "bg-primary_dark"
+            } flex justify-center items-center text-light rounded-lg`}
+          >
+            Selanjutnya
+          </a>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="w-full flex flex-col gap-3 p-6">
         {parseInt(nomor) !== 1 ? (
@@ -317,7 +350,13 @@ const Surah = () => {
                   onClick={() => handlePlay(i + 1)}
                 />
               )}
-              <Archive no={nomor} />
+              <Archive
+                no={item.number}
+                handleArchive={handleArchive}
+                archive={archive}
+                ayahs={ayahs}
+                nomor={item.number.inSurah}
+              />
             </div>
 
             <div className="w-full flex justify-end items-center gap-5">
