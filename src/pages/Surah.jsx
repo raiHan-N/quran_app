@@ -182,6 +182,15 @@ const Surah = () => {
   }, [nomor]);
 
   useEffect(() => {
+    let top = cardRef.current[archive.inSurah - 1];
+    if (top) {
+      top = top.offsetTop;
+    }
+    window.scrollTo({
+      top: top - 50,
+      behavior: "smooth",
+    });
+
     const surahStorage = localStorage.getItem("surah");
     if (!surahStorage && archive.length > -1) {
       localStorage.setItem("surah", JSON.stringify(archive));
@@ -192,6 +201,11 @@ const Surah = () => {
 
   useEffect(() => {
     localStorage.setItem("surah", JSON.stringify(archive));
+    const top = cardRef.current[archive.inSurah - 1]?.offsetTop;
+    window.scrollTo({
+      top: top - 50,
+      behavior: "smooth",
+    });
   }, [archive]);
 
   if (!surah) {
@@ -203,8 +217,13 @@ const Surah = () => {
   }
 
   const handleArchive = (no) => {
+    if (archive === no) {
+      setArchive([]);
+      localStorage.removeItem("param");
+      return;
+    }
     localStorage.setItem("param", JSON.stringify(nomor));
-    return setArchive(no);
+    setArchive(no);
   };
 
   return (
