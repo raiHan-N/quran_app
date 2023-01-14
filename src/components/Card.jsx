@@ -43,18 +43,20 @@ const Card = ({ title, nomor, arti, handleCard, likedData, like }) => {
           />
         )}
       </div>
-      <div className="flex flex-col">
-        <h1
-          className={`text-[36px] font-medium leading-[47px] ${
-            mode === "light" ? "text-primary" : "text-light"
-          } cursor-pointer hover:text-[#227f94]`}
-          onClick={() => handleCard(nomorRef)}
-        >
-          {title}
-        </h1>
-        <p className="text-[20px] font-[400] leading-[32px] text-lightdark">
-          {arti}
-        </p>
+      <div className="flex justify-between">
+        <div className="flex flex-col">
+          <h1
+            className={`text-[36px] font-medium leading-[47px] ${
+              mode === "light" ? "text-primary" : "text-light"
+            } cursor-pointer hover:text-[#227f94]`}
+            onClick={() => handleCard(nomorRef)}
+          >
+            {title}
+          </h1>
+          <p className="text-[20px] font-[400] leading-[32px] text-lightdark">
+            {arti}
+          </p>
+        </div>
       </div>
     </div>
   );

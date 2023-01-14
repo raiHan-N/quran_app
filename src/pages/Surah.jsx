@@ -197,7 +197,7 @@ const Surah = () => {
     } else {
       setArchive(JSON.parse(surahStorage));
     }
-  }, []);
+  }, [nomor]);
 
   useEffect(() => {
     localStorage.setItem("surah", JSON.stringify(archive));
